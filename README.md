@@ -1,5 +1,4 @@
 # MQIF - Mari's QOI-Like Interchange Format
----
 
 MQIF is a simple format based on GIF and QOI, made mostly as an experiment to see how viable scQOI is for general images.
 
