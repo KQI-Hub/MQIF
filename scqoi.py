@@ -25,7 +25,9 @@ def compress(originaldata):
                 cache.append(byte)
                 del cache[0]
                 if prevbyte is not None:
-                    diff = byte - prevbyte
+                    diff = (byte - prevbyte) % 256
+                    if diff > 127:
+                        diff -= 256
                 else:
                     diff = 255
                 if (diff <= 31) and (diff >= -32):
