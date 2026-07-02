@@ -10,11 +10,38 @@ def ppm_from_list(bitmap, desc = None):
 
     for row in bitmap:
         for pixel in row:
-            ppmbody.append(pixel[0])
-            ppmbody.append(pixel[1])
-            ppmbody.append(pixel[2])
+            if pixel is None:
+                ppmbody.append(255)
+                ppmbody.append(0)
+                ppmbody.append(255)
+
+            else:
+                ppmbody.append(pixel[0])
+                ppmbody.append(pixel[1])
+                ppmbody.append(pixel[2])
 
     return ppmhead.encode() + bytes(ppmbody)
+
+def pam_from_list(bitmap):
+    pamhead = f"P7\nWIDTH {len(bitmap[0])}\nHEIGHT {len(bitmap)}\nDEPTH 4\nMAXVAL 255\nTUPLTYPE RGB_ALPHA\nENDHDR\n" # PAM format
+    pambody = bytearray() # byte array
+    for row in bitmap:
+        for pixel in row:
+            if pixel is None:
+                pambody.append(0)
+                pambody.append(0)
+                pambody.append(0)
+                pambody.append(0)
+            else:
+                pambody.append(pixel[0])
+                pambody.append(pixel[1])
+                pambody.append(pixel[2])
+                if len(pixel) > 3:
+                    pambody.append(pixel[3])
+                else:
+                    pambody.append(255) # slightly heavier but allows for non-transparent images to output to an RGBA PAM
+
+    return pamhead.encode() + bytes(pambody)
 
 def pgm_from_list(bitmap, desc = None):
     pgmhead = "P5\n" # raw format
