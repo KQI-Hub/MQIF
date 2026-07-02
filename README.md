@@ -2,7 +2,7 @@
 
 MQIF is a simple format based on GIF and QOI, made mostly as an experiment to see how viable scQOI is for general images.
 
-Currently the implementation lacks support for multiple images per file / animation and transparency. I'll release a proper spec later.
+I'll release a proper spec later, maybe.
 
 MQIF File structure:
 ```
